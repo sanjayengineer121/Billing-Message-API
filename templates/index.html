@@ -1,0 +1,399 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Ping | Redeem Points </title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/offcanvas-navbar/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="/static/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
+<meta name="theme-color" content="#7952b3">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      #overlay{	
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height:100%;
+  display: none;
+  background: rgba(0,0,0,0.6);
+}
+.cv-spinner {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px #ddd solid;
+  border-top: 4px #2e93e6 solid;
+  border-radius: 50%;
+  animation: sp-anime 0.8s infinite linear;
+}
+@keyframes sp-anime {
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+.is-hide{
+  display:none;
+}
+
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="/static/css/offcanvas.css" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    <div id="overlay">
+      <div class="cv-spinner">
+        <span class="spinner"></span>
+      </div>
+    </div>
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation"  style="background-color:#25D366 !important;">
+  <div class="container">
+    <a class="navbar-brand" href="#">Ping With Winggz</a>
+    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Conversion</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Notifications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Switch account</a>
+        </li>
+     -->
+      </ul>
+    
+    </div>
+  </div>
+</nav>
+<!-- 
+<div class="nav-scroller bg-body shadow-sm">
+  <nav class="nav nav-underline" aria-label="Secondary navigation">
+    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+    <a class="nav-link" href="#">
+      Friends
+      <span class="badge bg-light text-dark rounded-pill align-text-bottom">27</span>
+    </a>
+    <a class="nav-link" href="#">Explore</a>
+    <a class="nav-link" href="#">Suggestions</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="#">Link</a>
+  </nav>
+</div> -->
+
+<main class="container">
+ 
+  <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+    <!-- <img class="me-3" src="/docs/5.1/assets/brand/bootstrap-logo-white.svg" alt="" width="48" height="38"> -->
+    <div class="lh-1">
+      <h1 class="h6 mb-0 text-white lh-1">Redeem Points</h1>
+      <!-- <small>Since 2011</small> -->
+    </div>
+  </div>
+
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    
+      <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile Number</label>
+        <input type="text" class="form-control" id="mobile" aria-describedby="emailHelp" name="mobile">
+      </div>
+      <div class="mb-3">
+        <label for="points" class="form-label">Points</label>
+        <input type="text" class="form-control" id="points" name="points">
+      </div>
+      <div class="mb-3" id="otp_div">
+        <label for="otp" class="form-label">Enter Customer Mobile Number</label>
+        <input type="text" class="form-control" id="otp" name="otp">
+      </div>
+      <br>
+      <div class="mb-3" >
+      <div class="row">
+        <div class="col-sm-6">
+          <button class="btn btn-info text-white" onclick="redeem_points()">Submit</button>
+      </div>
+      <!-- <div class="col-sm-6" style="text-align: end;" id="redend_otp">
+        <button class="btn btn-warning text-white" onclick="resend_otp()">resend OTP</button>
+        </div> -->
+      </div>
+      <!-- <button class="btn btn-primary" onclick="redeem_points()">Submit</button> -->
+  
+  </div>
+
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Suggestions</h6>
+    <div class="d-flex text-muted pt-3">
+      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+
+      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+        <div class="d-flex justify-content-between">
+          <strong class="text-gray-dark">Full Name</strong>
+          <a href="#">Follow</a>
+        </div>
+        <span class="d-block">@username</span>
+      </div>
+    </div>
+    <div class="d-flex text-muted pt-3">
+      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+
+      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+        <div class="d-flex justify-content-between">
+          <strong class="text-gray-dark">Full Name</strong>
+          <a href="#">Follow</a>
+        </div>
+        <span class="d-block">@username</span>
+      </div>
+    </div>
+    <div class="d-flex text-muted pt-3">
+      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+
+      <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+        <div class="d-flex justify-content-between">
+          <strong class="text-gray-dark">Full Name</strong>
+          <a href="#">Follow</a>
+        </div>
+        <span class="d-block">@username</span>
+      </div>
+    </div>
+    <small class="d-block text-end mt-3">
+      <a href="#">All suggestions</a>
+    </small>
+  </div>
+
+<!-- model -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Set Point Converstion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="money" class="col-form-label">Money</label>
+            <input type="text" class="form-control" id="money" value={{data.money}}>
+          </div>
+          <div class="mb-3">
+            <label for="points" class="col-form-label">Points</label>
+            <input type="text" class="form-control" id="points1" value={{data.points}}>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" onclick="set_point_configration()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="/static/js/offcanvas.js"></script>
+      <script>
+  async function redeem_points() {
+    $("#overlay").show();
+    var user = JSON.parse('{{data | tojson}}');
+
+
+    var mobile=document.getElementById("mobile").value;
+	
+	var points=document.getElementById("points").value;
+  var otp=document.getElementById("otp").value;
+  var data='{"username":"'+user['username']+'","password":"'+user['password']+'"}';
+	
+  console.log(mobile+"::"+points);
+
+
+if(otp=="")
+{
+  var xhr = new XMLHttpRequest();
+	xhr.open("GET","/redeem-point?mobileNumber="+mobile+"&points="+points,true);
+        xhr.setRequestHeader("Content-Type", "application/json","Access-Control-Allow-Origin","*");
+	
+ xhr.onload = function () {
+  $("#overlay").hide();
+
+                data=JSON.parse(this.responseText);
+                if(data['error'] ==="null")
+                {
+                  $("#otp_div").show();
+                  $("#redend_otp").show();
+                  console.log("success");
+                }else{
+                  swal("Warning!",data['error']).then(function() {});
+                }
+                
+           
+
+}
+ xhr.send(data);
+}else{
+  console.log("otpEnter");
+  var xhr = new XMLHttpRequest();
+	xhr.open("GET","/redeem-point-confirmation?mobileNumber="+mobile+"&points="+points+"&otp="+otp,true);
+        xhr.setRequestHeader("Content-Type", "application/json","Access-Control-Allow-Origin","*");
+	
+ xhr.onload = function () {
+  $("#overlay").hide();
+                data=JSON.parse(this.responseText);
+                if(data['error'] ==="null")
+                {
+             
+                  console.log("@@success");
+                  swal("Successfull!",data['message']).then(function() {
+                    location.reload();
+
+});
+                }else{
+                  swal("Warning!",data['error']).then(function() {});
+                }
+                
+           
+
+}
+ xhr.send(data);
+
+}
+
+  }
+
+
+  async function resend_otp() {
+    $("#overlay").show();
+    var user = JSON.parse('{{data | tojson}}');
+
+
+    var mobile=document.getElementById("mobile").value;
+	
+	var points=document.getElementById("points").value;
+  var otp=document.getElementById("otp").value='';
+  var data='{"username":"'+user['username']+'","password":"'+user['password']+'"}';
+	
+  console.log(mobile+"::"+points);
+
+
+  var xhr = new XMLHttpRequest();
+	xhr.open("GET","/redeem-point?mobileNumber="+mobile+"&points="+points,true);
+        xhr.setRequestHeader("Content-Type", "application/json","Access-Control-Allow-Origin","*");
+	
+ xhr.onload = function () {
+  $("#overlay").hide();
+
+                data=JSON.parse(this.responseText);
+                if(data['error'] ==null)
+                {
+                  $("#otp_div").show();
+                  $("#redend_otp").show();
+                  console.log("success");
+                }else{
+                  console.log("error");
+                }
+                
+           
+
+}
+ xhr.send(data);
+
+
+  }
+
+ 
+  async function set_point_configration(){
+
+    $("#overlay").show();
+    var user = JSON.parse('{{data | tojson}}');
+
+
+    var mobile=document.getElementById("mobile").value;
+	
+	var money=document.getElementById("money").value;
+  var points1=document.getElementById("points1").value;
+  var data='{"money":"'+money+'","points":"'+points1+'"}';
+	
+ 
+
+  var xhr = new XMLHttpRequest();
+	xhr.open("POST","/set-point-conversion",true);
+        xhr.setRequestHeader("Content-Type", "application/json","Access-Control-Allow-Origin","*");
+	
+ xhr.onload = function () {
+  $("#overlay").hide();
+
+                data=JSON.parse(this.responseText);
+                swal("Successfull!","Updated").then(function() {
+                    location.reload();
+
+});
+                
+           
+
+}
+ xhr.send(data);
+  }
+  
+      </script>
+      <script>
+        
+        $("#redend_otp").hide();
+ $("#otp_div").hide();
+ $("#overlay").hide();
+
+      </script>
+
+  </body>
+</html>
