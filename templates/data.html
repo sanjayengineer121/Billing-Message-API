@@ -1,14 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MY TABLE</title>
-</head>
-<body>
-    {% for error in errors %}
-    <h4>{{ error }}</h4>
-  {% endfor %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>sno</th>
+        <th>Mobile</th>
+        <th>Name</th>
+        <th>Msg</th>
+        <th>Price</th>
+        <th>Voucher</th>
+        <th>date</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        ajax: '/api/data',
+        serverSide: true,
+        columns: [
+          {data: 'sno'},
+          {data: 'Mobile'},
+          {data: 'Name', orderable: false},
+          {data: 'Msg', orderable: false},
+          {data: 'Price'},
+          {data: 'Voucher'},
+          {data: 'date'}
+        ],
+      });
+    });
+  </script>
+{% endblock %}
+
+
