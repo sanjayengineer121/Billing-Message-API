@@ -23,7 +23,16 @@ class TODO(db.Model):
     Voucher=db.Column(db.String(8),nullable=False)
     date=db.Column(db.String(10),nullable=False)
     
-    
+    def to_dict(self):
+        return {
+            'sno': self.sno,
+            'Mobile': self.Mobile,
+            'Name': self.Name,
+            'Msg': self.Msg,
+            'Price': self.Price,
+            'Voucher': self.Voucher,
+            'date': self.date
+        }
     def __repr__(self) -> str:
         return f'{self.sno} - {self.title}'
 
@@ -37,7 +46,7 @@ db.create_all()
 
 
 
-@application.route("/tallymsg")
+@application.route("/send_att")
 def demo_world():
     mobile = request.args.get('mobile')
     message = request.args.get('message')
@@ -288,7 +297,7 @@ def demo_world2():
     db.session.add(sale)
     db.session.commit()
 
-@application.route("/", methods = ['GET', 'POST'])
+@application.route("/current", methods = ['GET', 'POST'])
 def home():
     
     return flask.send_file("current.txt")
@@ -298,7 +307,58 @@ def uploader():
     return flask.send_file("geek.txt")
 
 
- 
+@application.route('/', methods = ['GET', 'POST'])
+def index():
+    return render_template('data.html', title='Data-Table')
+
+
+
+@application.route('/api/data')
+def data():
+    query = TODO.query
+
+    # search filter
+    search = request.args.get('search[value]')
+    if search:
+        query = query.filter(db.or_(
+            TODO.sno.like(f'%{search}%'),
+            TODO.Mobile.like(f'%{search}%'),
+            TODO.Voucher.like(f'%{search}%')
+        ))
+    total_filtered = query.count()
+
+    # sorting
+    order = []
+    i = 0
+    while True:
+        col_index = request.args.get(f'order[{i}][column]')
+        if col_index is None:
+            break
+        col_name = request.args.get(f'columns[{col_index}][data]')
+        if col_name not in ['sno', 'Mobile', 'Voucher']:
+            col_name = 'Mobile'
+        descending = request.args.get(f'order[{i}][dir]') == 'desc'
+        col = getattr(TODO, col_name)
+        if descending:
+            col = col.desc()
+        order.append(col)
+        i += 1
+    if order:
+        query = query.order_by(*order)
+
+    # pagination
+    start = request.args.get('start', type=int)
+    length = request.args.get('length', type=int)
+    query = query.offset(start).limit(length)
+
+    # response
+    return {
+        'data': [todo.to_dict() for todo in query],
+        'recordsFiltered': total_filtered,
+        'recordsTotal': TODO.query.count(),
+        'draw': request.args.get('draw', type=int),
+    }
+
 
 if __name__=="__main__":
     application.run(debug=True,port=8000)
