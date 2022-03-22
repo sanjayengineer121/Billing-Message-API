@@ -14,8 +14,22 @@ application.config['SQLALCHEMY_DATABASE_URI']='sqlite:///sales.db'
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db=SQLAlchemy(application)
 
+class TODO(db.Model):
+    sno=db.Column(db.Integer, primary_key=True)
+    Mobile=db.Column(db.Integer,nullable=False)
+    Name=db.Column(db.String(500),nullable=False)
+    Msg=db.Column(db.String(2000),nullable=False)
+    Price=db.Column(db.Integer,nullable=False)
+    Voucher=db.Column(db.String(8),nullable=False)
+    date=db.Column(db.String(10),nullable=False)
+    
+    
+    def __repr__(self) -> str:
+        return f'{self.sno} - {self.title}'
 
+    
 
+db.create_all()
 
 
 
@@ -95,7 +109,17 @@ def demo_world():
             file.write(name)
             file.write("\n\n===============================================================================\n\n")
             file.close()
-       
+            sale=TODO(Mobile=mobile,Name=name,Msg=message,Price=prch,Voucher=vch,date=d1)
+            db.session.add(sale)
+            db.session.commit()
+
+            Api="http://127.0.0.1:8082/send_att?mobile="+mobile+"&message="+message+"&attach="+attach
+            whatsAppHitApi = requests.get(Api)
+            mobile1='6388574919'
+            Api="http://127.0.0.1:8082/send_att?mobile="+mobile1+"&message="+message+"&attach="+attach
+            whatsAppHitApi = requests.get(Api)
+            
+        
 
     return "HELLO"
 
@@ -182,6 +206,15 @@ def demo_world1():
     file.write("\n\n===============================================================================\n\n")
     file.close()
 
+    sale=TODO(Mobile=mobile,Name=cust,Msg=message,Price=amo,Voucher=vch,date=dat)
+    db.session.add(sale)
+    db.session.commit()
+    Api="http://127.0.0.1:8082/send_att?mobile="+mobile+"&message="+message+"&attach="+attach
+    whatsAppHitApi = requests.get(Api)
+    mobile1='6388574919'
+    Api="http://127.0.0.1:8082/send_att?mobile="+mobile1+"&message="+message+"&attach="+attach
+    whatsAppHitApi = requests.get(Api)
+    
     return "HELLO"
 
 @application.route("/busysms")
@@ -251,8 +284,13 @@ def demo_world2():
     file.write("\n\n===============================================================================\n\n")
     file.close()
 
+    sale=TODO(Mobile=mobile,Name=cust,Msg=message,Price=amo,Voucher=vch,date=str(now))
+    db.session.add(sale)
+    db.session.commit()
+
 @application.route("/", methods = ['GET', 'POST'])
 def home():
+    
     return flask.send_file("current.txt")
 
 @application.route('/sales', methods = ['GET', 'POST'])
